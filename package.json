@@ -1,0 +1,38 @@
+{
+  "name": "super-crontab",
+  "version": "0.0.1",
+  "description": "分布式定时任务管理系统",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "babel": "npm run babel:c && babel src -d target",
+    "babel:c": "rm -Rf target",
+    "babel:w": "npm run babel:c && babel src -d target -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SuperID/super-crontab.git"
+  },
+  "keywords": [
+    "crontab"
+  ],
+  "author": "Zongmin Lei <leizongmin@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SuperID/super-crontab/issues"
+  },
+  "homepage": "https://github.com/SuperID/super-crontab#readme",
+  "devDependencies": {
+    "babel-cli": "^6.5.1",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-preset-es2015-node4": "^2.0.3",
+    "babel-preset-stage-0": "^6.5.0",
+    "mocha": "^2.4.5"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "clouds-socket": "^0.2.0-beta-5",
+    "debug": "^2.2.0",
+    "express": "^4.13.4"
+  }
+}
