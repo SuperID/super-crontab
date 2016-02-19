@@ -3,6 +3,10 @@
   "version": "0.0.1",
   "description": "分布式定时任务管理系统",
   "main": "index.js",
+  "bin": {
+    "super-crontab": "./target/bin/cli.js",
+    "scron": "./target/bin/cli.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "babel": "npm run babel:c && babel src -d target",

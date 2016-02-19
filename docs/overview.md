@@ -44,6 +44,11 @@ worker 和 cli-tool 在连接到到服务器时均需要验证身份。使用授
 + cli-tool 授权主要用于限制可将代码提交到哪个分组
 + worker 授权主要用于限制外部非法连接
 
+### 任务分发
+
++ 任务尽可能在其上一次执行的 worker 上执行，这样可以避免重复传输并部署任务代码
++ 预先计算好一分钟内需要执行的任务列表
+
 ## 命令行工具
 
 ### 登录服务器
@@ -113,3 +118,9 @@ $ super-crontab-worker start --server <host>:<port> --auth <授权字符串>
 + `--group <name>` - 指定worker所属的分组，默认`default`
 + `--max-jobs <num>` - 最大同时执行作业数，默认不限制
 + `--path <dir>` - 任务临时数据存储目录，默认`~/.super-crontab/tmp`
+
+### 执行任务
+
++ 使用子进程方式启动任务，并捕获进程的stdout和stderr输出
++ 任务启动时需要传递过去的基本信息通过JSON文件给出，设置环境变量`SUPER_CRONTAB_JOB_ARGS_FILE=xxxxxx.json`
++ 任务执行结果以JSON格式输出到指定文件，文件名从环境变量`SUPER_CRONTAB_JOB_RESULT_FILE`获取
