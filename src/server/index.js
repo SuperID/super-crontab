@@ -7,6 +7,7 @@
 import path from 'path';
 import ProjectCore from 'project-core';
 import tracer from 'tracer';
+import knex from 'knex';
 
 
 global.$ = new ProjectCore();
@@ -35,16 +36,29 @@ $.init.add(next => {
 });
 
 // 扩展utils
-$.extends(require('./init/utils').default);
+$.init.load(path.resolve(__dirname, './init/utils.js'));
 
 // 加载models
-$.init.add(require('./init/models').default);
+$.init.add(next => {
+  $.logger.info('initing models...');
+  const mysql = knex({
+    client: 'mysql',
+    connection: $.config.get('db.mysql.connection'),
+    pool: {
+      min: $.config.get('db.mysql.pool.min'),
+      max: $.config.get('db.mysql.pool.max'),
+    },
+  });
+  $.data.set('db.mysql', mysql);
+  next();
+});
+$.init.load(path.resolve(__dirname, './models'));
 
 // 加载methods
-$.init.add(require('./init/methods').default);
+$.init.load(path.resolve(__dirname, './methods'));
 
 // 加载Express
-$.init.add(require('./init/express').default);
+$.init.load(path.resolve(__dirname, './init/express.js'));
 
 $.init(err => {
   if (err) {
