@@ -14,6 +14,10 @@ export default function (done) {
   const mysql = knex({
     client: 'mysql',
     connection: $.config.get('db.mysql.connection'),
+    pool: {
+      min: $.config.get('db.mysql.pool.min'),
+      max: $.config.get('db.mysql.pool.max'),
+    },
   });
   $.data.set('db.mysql', mysql);
 

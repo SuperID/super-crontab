@@ -25,6 +25,7 @@ Job = {
   group: String,      // 分组
   rule: String,       // 执行规则
   status: Object,     // 状态
+  createdAt: Date,    // 创建时间
 };
 
 // 执行结果
@@ -35,5 +36,13 @@ Result = {
   startedAt: Date,    // 执行时间
   stoppedAt: Date,    // 结束时间
   data: Object,       // 结果
+};
+
+// 授权
+Token = {
+  type: String,       // 类型：client, worker
+  token: String,      // 授权码
+  createdAt: Date,    // 创建时间
+  expireAt: Date,     // 过期时间
 };
 ```

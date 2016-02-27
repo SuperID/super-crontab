@@ -19,9 +19,11 @@ export default function (done) {
     $.logger.info('create table packages...');
     mysql.schema.createTable('packages', t => {
 
+      t.charset('utf8');
+
       t.string('name', 255);
       t.string('version', 255);
-      t.dateTime('published_at');
+      t.dateTime('published_at').defaultTo(mysql.fn.now());
       t.text('info');
       t.string('file_hash', 255);
       t.string('file_path', 255);
