@@ -11,7 +11,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "babel": "npm run babel:c && babel src -d target",
     "babel:c": "rm -Rf target",
-    "babel:w": "npm run babel:c && babel src -d target -w"
+    "babel:w": "npm run babel:c && babel src -d target -w",
+    "server:dev": "export CONFIG_FILE=./examples/server_config.js && node target/server"
   },
   "repository": {
     "type": "git",
@@ -36,8 +37,16 @@
   "dependencies": {
     "body-parser": "^1.15.0",
     "clouds-socket": "^0.2.0-beta-5",
+    "connect": "^3.4.1",
+    "connect-multiparty": "^2.0.0",
     "debug": "^2.2.0",
     "express": "^4.13.4",
-    "project-core": "0.0.12"
+    "knex": "^0.10.0",
+    "lei-ns": "^0.3.0",
+    "mysql": "^2.10.2",
+    "project-core": "0.0.13",
+    "rd": "0.0.2",
+    "serve-static": "^1.10.2",
+    "tracer": "^0.8.3"
   }
 }
