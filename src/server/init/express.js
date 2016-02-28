@@ -49,26 +49,8 @@ export default async function (done) {
 
   //----------------------------------------------------------------------------
 
-  $.data.set('middleware.login', function (req, res, next) {
-    if (req.session.user && req.session.user.id) {
-      req.data.set('user', req.session.user);
-      if (req.params.company_id) {
-        $.method('company.get').call({id: req.params.company_id})
-          .then(company => {
-            if (company && company.owner_id === req.session.user.id) {
-              req.data.set('company', company);
-              next();
-            } else {
-              next(new $.utils.PermissionDeniedError(`don't allowed to access company`));
-            }
-          })
-          .catch(next);
-      } else {
-        next();
-      }
-    } else {
-      next(new $.utils.UserNotLoginError());
-    }
+  $.data.set('middleware.checkToken', function (req, res, next) {
+    next();
   });
 
   router.use(function (req, res, next) {
@@ -97,6 +79,8 @@ export default async function (done) {
     }
     next();
   });
+
+  app.use('/api', $.data.get('middleware.checkToken'));
 
   app.use(router);
 

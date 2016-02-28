@@ -22,11 +22,18 @@ export default function (done) {
       t.charset('utf8');
 
       t.string('name', 255);
-      t.boolean('eanble').defaultTo(false);
+      t.boolean('is_enable').defaultTo(false);
       t.text('env', true);
 
       t.primary('name');
 
+    }).then(_ => {
+      $.logger.info('insert default data to groups...');
+      return mysql.table('groups').insert({
+        name: 'default',
+        is_enable: 1,
+        env: '{}',
+      });
     }).then(_ => done()).catch(done);
   }
 

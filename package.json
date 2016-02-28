@@ -12,7 +12,7 @@
     "babel": "npm run babel:c && babel src -d target",
     "babel:c": "rm -Rf target",
     "babel:w": "npm run babel:c && babel src -d target -w",
-    "server:dev": "export DEBUG='project-core:*' && export CONFIG_FILE=./examples/server_config.js && node target/server"
+    "server:dev": "export DEBUG='project-core:*,knex:*' && export CONFIG_FILE=./examples/server_config.js && node target/server"
   },
   "repository": {
     "type": "git",
